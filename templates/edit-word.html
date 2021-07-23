@@ -1,0 +1,34 @@
+{% include "header.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+<main class="bg-main-color">
+    <div class="container-fluid d-flex flex-column">
+        <div class="container-inner">
+            <section id="edit-section">
+                <h2 class="page-header">Edit</h2>
+
+                <div class="card card-body">
+                {% if current_user.is_authenticated and current_user.id == 1 %}
+
+                    <!-- Flash Messages -->
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                    <ul class=flashes>
+                        {% for category, message in messages %}
+                        <li class="{{ category }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    {% endwith %}
+
+                    <!-- Flask-Bootstrap WTForms -->
+                    {{ wtf.quick_form(form, novalidate=True, button_map={"submit": "success"}) }}
+
+                {% endif %}
+                </div>
+
+            </section>
+        </div>
+    </div>
+</main>
+{% include "footer.html" %}

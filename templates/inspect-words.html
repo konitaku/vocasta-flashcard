@@ -1,0 +1,36 @@
+{% include "header.html" %}
+
+<main class="bg-main-color">
+    <div class="container-fluid d-flex flex-column">
+        <div class="container-inner">
+            <section id="inspection">
+                <h2 class="page-header">Inspection</h2>
+
+                <div class="result-container">
+
+                    {% if word_list %}
+                    <ul>
+                        {% for word in word_list %}
+                        <li class="d-flex">
+                            <p>
+                                {{word[lang]}}
+                            </p>
+                            <p>{{ word["ja"] }}</p>
+                            {% if current_user.is_authenticated and current_user.id == 1 %}
+                            <a class="fal fa-edit edit-icon" target="_blank" href="{{ url_for( 'edit_word', word_id=word['word_id'] ) }}"></a>
+                            {% endif %}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    <a class="btn btn-success goback-home" type="button" href="{{url_for('home')}}">ホームへ戻る</a>
+
+                </div>
+
+
+            </section>
+        </div>
+
+    </div>
+</main>
+{% include "footer.html" %}

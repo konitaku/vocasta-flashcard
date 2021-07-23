@@ -1,0 +1,33 @@
+{% include "header.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+<main class="bg-main-color">
+    <div class="container-fluid d-flex flex-column">
+        <div class="container-inner">
+            <section id="lp-main">
+                <!-- <h2 class="page-header">Vocasta</h2> -->
+                <div class="main-copy-container">
+                    <p class="main-copy">全5ヶ国語、<br>計15,000単語を<br>無料で。</p>
+                </div>
+
+                <div class="lp-btn-container">
+                    <p class="sub-copy">Vocastaをはじめよう</p>
+                    <a class="btn btn-success create-account-btn d-flex justify-content-center align-items-center" type="button" href="{{url_for('register')}}">
+                        <div>
+                            アカウント作成
+                        </div>
+                    </a>
+                    <a class="btn btn-success login-btn d-flex justify-content-center align-items-center" type="button" href="{{url_for('login', lang=lang, index=new_index)}}">
+                        <div>
+                            ログイン
+                        </div>
+                    </a>
+
+                    <a class="blue-link" href="{{ url_for('about') }}">Vocastaとは&raquo;</a>
+                </div>
+            </section>
+        </div>
+
+    </div>
+</main>
+{% include "footer.html" %}

@@ -1,0 +1,22 @@
+{% include "header.html" %}
+
+<main class="bg-main-color">
+    <div class="container-fluid d-flex flex-column">
+        <div class="container-inner">
+            <section id="inspection">
+                <h2 class="page-header">ただいま準備中です...</h2>
+
+                <div class="">
+                    <img class="apologize-man-img" src="{{ url_for('static', filename='image/ojigi_man.png') }}" alt="申し訳ありません">
+                    
+                    <a class="btn btn-success goback-home" type="button" href="{{url_for('home')}}">ホームへ戻る</a>
+
+                </div>
+
+
+            </section>
+        </div>
+
+    </div>
+</main>
+{% include "footer.html" %}

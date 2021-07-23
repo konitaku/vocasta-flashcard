@@ -1,0 +1,27 @@
+{% include "header.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+<main class="bg-main-color">
+    <div class="container-fluid d-flex flex-column">
+        <div class="container-inner">
+            <section id="login-section">
+                <h2 class="page-header">アカウント作成</h2>
+
+                <!-- Flash Messages -->
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                <ul class=flashes>
+                    {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% endwith %}
+
+                {{ wtf.quick_form(form, novalidate=True, button_map={"submit": "success"}) }}
+            </section>
+        </div>
+
+    </div>
+</main>
+{% include "footer.html" %}

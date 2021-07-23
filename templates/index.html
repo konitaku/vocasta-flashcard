@@ -1,0 +1,354 @@
+{% include "header.html" %}
+<main>
+<!-- <main class="bg-main-color"> -->
+    <div class="container-fluid d-flex flex-column">
+        <div class="container-inner">
+            <!-- Progress Board -->
+            <section id="progress">
+
+            <h2 class="page-header">ホーム</h2>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                <ul class=flashes>
+                    {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% endwith %}
+                <div class="card">
+                    <section class="progress-board card-body d-flex justify-content-between">
+                        <header class="progress-header">
+                            <p>あなたが覚えた単語数</p>
+                        </header>
+
+                        <div class="total-score-box">
+                            <p>Total</p>
+                            <p class="total-score">{{ user_score }}語</p>
+                        </div>
+                    </section>
+                    <section class="card-footer">
+                        <header>
+                            <h3 class="small-heading">言語別</h3>
+                        </header>
+                        <div class="d-flex">
+                            {% for lang in lang_list %}
+                            <div class="lang-score card">
+                                <div class="card-body">
+                                    <p class="small-text">{{ lang_headings[lang] }}</p>
+                                    <p>{{ user_scores[lang_list.index(lang)] }}語</p>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            
+                        </div>
+
+                    </section>
+                </div>
+            </section>
+            <!-- Choose Language Section -->
+            <section id="choose-lang">
+                <h2 class="small-heading">学習する</h2>
+<!----------------------------- English ----------------------------------->
+                {% set lang = "en" %}
+                <div class="card" data-bs-toggle="collapse" data-bs-target="#{{lang}}-child" aria-expanded="false" aria-controls="{{lang}}-child">
+                    <div class="card-body">
+                    {% if current_user.is_authenticated %}
+                        {% set user_logs = StudyLog.query.filter(StudyLog.user_id == current_user.id).filter(StudyLog.word_id <= 3000).all() %}
+                        {% set recent_learning_duration = date_duration_calc(extract_max_datetime(user_logs)) %}
+                        <p>英語　3000</p><span class="learning-date small-text">{{ duration_int_to_date(recent_learning_duration) }}</span>
+                    {% else %}
+                        <p>英語　3000</p>
+                    {% endif %}
+                    </div>
+                </div>
+                <section class="choose-section collapse" id="{{lang}}-child">
+
+                    {% for i in range(30) %}
+                    {% set section_num = (i + 1) * 100 %}
+
+                    {% set index = (1+i*100, section_num) | join("-") %}
+                    {% if current_user.is_authenticated and current_user.id == 1 %}
+                    <div class="edit-icon-container">
+                        <span class="pale-text small-text">{{index}}</span>
+                        <a class="fal fa-edit edit-icon" href="{{ url_for('inspect_words', lang=lang, index=index) }}"></a>
+                    </div>
+                    {% endif %}
+
+                    <div class="card" data-bs-toggle="collapse" data-bs-target="#{{lang}}-child-{{ section_num }}" aria-expanded="false" aria-controls="{{lang}}-child-{{ section_num }}">
+                        <div class="card-body">
+                            {% if current_user.is_authenticated %}
+                                {% set user_logs = StudyLog.query.filter(StudyLog.user_id == current_user.id).filter(StudyLog.word_id >= 1 + i * 100).filter(StudyLog.word_id <= section_num).all() %}
+                                {% set recent_learning_duration = date_duration_calc(extract_max_datetime(user_logs)) %}
+                                <p>{{ 1 + i * 100 }}~{{ section_num }}語</p><span class="learning-date small-text">{{ duration_int_to_date(recent_learning_duration) }}</span>
+                            {% else %}
+                                <p>{{ 1 + i * 100 }}~{{ section_num }}語</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <section class="choose-word-set collapse" id="{{lang}}-child-{{ section_num }}">
+
+                        {% for number in range(i*10, i*10 + 10) %}
+                        {% set num1 = 1 + number * 10 %}
+                        {% set num2 = (number + 1) * 10 %}
+                        {% set index_num = (num1, num2)|join("-") %}
+                        <a class="card" href="{{ url_for('quiz', lang=lang, index=index_num) }}">
+                            <div class="card-body">
+                            {% if current_user.is_authenticated %}
+                                {% set user_logs = StudyLog.query.filter(StudyLog.user_id == current_user.id).filter(StudyLog.word_id >= num1).filter(StudyLog.word_id <= num2).all() %}
+                                {% set recent_learning_duration = date_duration_calc(extract_max_datetime(user_logs)) %}
+                                <p>{{ num1 }}~{{ num2 }}語</p><span class="learning-date small-text">{{ duration_int_to_date(recent_learning_duration) }}</span>
+                            {% else %}
+                                <p>{{ num1 }}~{{ num2 }}語</p>
+                            {% endif %}
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </section>
+
+                    {% endfor %}
+                </section>
+
+<!----------------------------- French ----------------------------------->
+
+                {% set lang = "fr" %}
+                <div class="card" data-bs-toggle="collapse" data-bs-target="#{{lang}}-child" aria-expanded="false" aria-controls="{{lang}}-child">
+                    <div class="card-body">
+                    {% if current_user.is_authenticated %}
+                        {% set user_logs = StudyLog.query.filter(StudyLog.user_id == current_user.id).filter(StudyLog.word_id > 3000).filter(StudyLog.word_id <= 6000).all() %}
+                        {% set recent_learning_duration = date_duration_calc(extract_max_datetime(user_logs)) %}
+                        <p>フランス語　3000</p><span class="learning-date small-text">{{ duration_int_to_date(recent_learning_duration) }}</span>
+                    {% else %}
+                        <p>フランス語　3000</p>
+                    {% endif %}
+                    </div>
+                </div>
+                <section class="choose-section collapse" id="{{lang}}-child">
+
+                    {% for i in range(30) %}
+                    {% set section_num = (i + 1) * 100 %}
+
+                    {% set index = (1+i*100, section_num) | join("-") %}
+                    {% if current_user.is_authenticated and current_user.id == 1 %}
+                    <div class="edit-icon-container">
+                        <span class="pale-text small-text">{{index}}</span>
+                        <a class="fal fa-edit edit-icon" href="{{ url_for('inspect_words', lang=lang, index=index) }}"></a>
+                    </div>
+                    {% endif %}
+
+                    <div class="card" data-bs-toggle="collapse" data-bs-target="#{{lang}}-child-{{ section_num }}" aria-expanded="false" aria-controls="{{lang}}-child-{{ section_num }}">
+                        <div class="card-body">
+                        {% if current_user.is_authenticated %}
+                            {% set user_logs = StudyLog.query.filter(StudyLog.user_id == current_user.id).filter(StudyLog.word_id >= 1 + i * 100 + 3000).filter(StudyLog.word_id <= section_num + 3000).all() %}
+                            {% set recent_learning_duration = date_duration_calc(extract_max_datetime(user_logs)) %}
+                            <p>{{ 1 + i * 100 }}~{{ section_num }}語</p><span class="learning-date small-text">{{ duration_int_to_date(recent_learning_duration) }}</span>
+                        {% else %}
+                            <p>{{ 1 + i * 100 }}~{{ section_num }}語</p>
+                        {% endif %}
+                        </div>
+                    </div>
+                    <section class="choose-word-set collapse" id="{{lang}}-child-{{ section_num }}">
+
+                        {% for number in range(i*10, i*10 + 10) %}
+                        {% set num1 = 1 + number * 10 %}
+                        {% set num2 = (number + 1) * 10 %}
+                        {% set index_num = (num1, num2)|join("-") %}
+                        <a class="card" href="{{ url_for('quiz', lang=lang, index=index_num) }}">
+                            <div class="card-body">
+                                {% if current_user.is_authenticated %}
+                                {% set user_logs = StudyLog.query.filter(StudyLog.user_id == current_user.id).filter(StudyLog.word_id >= num1 + 3000).filter(StudyLog.word_id <= num2 + 3000).all() %}
+                                {% set recent_learning_duration = date_duration_calc(extract_max_datetime(user_logs)) %}
+                                <p>{{ num1 }}~{{ num2 }}語</p><span class="learning-date small-text">{{ duration_int_to_date(recent_learning_duration) }}</span>
+                            {% else %}
+                                <p>{{ num1 }}~{{ num2 }}語</p>
+                            {% endif %}
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </section>
+                    {% endfor %}
+                </section>
+
+<!----------------------------- Chinese ----------------------------------->
+                {% set lang = "zh" %}
+                <div class="card" data-bs-toggle="collapse" data-bs-target="#{{lang}}-child" aria-expanded="false" aria-controls="{{lang}}-child">
+                    <div class="card-body">
+                    {% if current_user.is_authenticated %}
+                        {% set user_logs = StudyLog.query.filter(StudyLog.user_id == current_user.id).filter(StudyLog.word_id > 6000).filter(StudyLog.word_id <= 9000).all() %}
+                        {% set recent_learning_duration = date_duration_calc(extract_max_datetime(user_logs)) %}
+                        <p>中国語　3000</p><span class="learning-date small-text">{{ duration_int_to_date(recent_learning_duration) }}</span>
+                    {% else %}
+                        <p>中国語　3000</p>
+                    {% endif %}
+                    </div>
+                </div>
+                <section class="choose-section collapse" id="{{lang}}-child">
+
+                    {% for i in range(30) %}
+                    {% set section_num = (i + 1) * 100 %}
+
+                    {% set index = (1+i*100, section_num) | join("-") %}
+                    {% if current_user.is_authenticated and current_user.id == 1 %}
+                    <div class="edit-icon-container">
+                        <span class="pale-text small-text">{{index}}</span>
+                        <a class="fal fa-edit edit-icon" href="{{ url_for('inspect_words', lang=lang, index=index) }}"></a>
+                    </div>
+                    {% endif %}
+
+                    <div class="card" data-bs-toggle="collapse" data-bs-target="#{{lang}}-child-{{ section_num }}" aria-expanded="false" aria-controls="{{lang}}-child-{{ section_num }}">
+                        <div class="card-body">
+                            {% if current_user.is_authenticated %}
+                                {% set user_logs = StudyLog.query.filter(StudyLog.user_id == current_user.id).filter(StudyLog.word_id >= 1 + i * 100 + 6000).filter(StudyLog.word_id <= section_num + 6000).all() %}
+                                {% set recent_learning_duration = date_duration_calc(extract_max_datetime(user_logs)) %}
+                                <p>{{ 1 + i * 100 }}~{{ section_num }}語</p><span class="learning-date small-text">{{ duration_int_to_date(recent_learning_duration) }}</span>
+                            {% else %}
+                                <p>{{ 1 + i * 100 }}~{{ section_num }}語</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <section class="choose-word-set collapse" id="{{lang}}-child-{{ section_num }}">
+
+                        {% for number in range(i*10, i*10 + 10) %}
+                        {% set num1 = 1 + number * 10 %}
+                        {% set num2 = (number + 1) * 10 %}
+                        {% set index_num = (num1, num2)|join("-") %}
+                        <a class="card" href="{{ url_for('quiz', lang=lang, index=index_num) }}">
+                            <div class="card-body">
+                            {% if current_user.is_authenticated %}
+                                {% set user_logs = StudyLog.query.filter(StudyLog.user_id == current_user.id).filter(StudyLog.word_id >= num1 + 6000).filter(StudyLog.word_id <= num2 + 6000).all() %}
+                                {% set recent_learning_duration = date_duration_calc(extract_max_datetime(user_logs)) %}
+                                <p>{{ num1 }}~{{ num2 }}語</p><span class="learning-date small-text">{{ duration_int_to_date(recent_learning_duration) }}</span>
+                            {% else %}
+                                <p>{{ num1 }}~{{ num2 }}語</p>
+                            {% endif %}
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </section>
+                    {% endfor %}
+                </section>
+
+<!----------------------------- Spanish ----------------------------------->
+                {% set lang = "es" %}
+                <div class="card" data-bs-toggle="collapse" data-bs-target="#{{lang}}-child" aria-expanded="false" aria-controls="{{lang}}-child">
+                    <div class="card-body">
+                    {% if current_user.is_authenticated %}
+                        {% set user_logs = StudyLog.query.filter(StudyLog.user_id == current_user.id).filter(StudyLog.word_id > 9000).filter(StudyLog.word_id <= 12000).all() %}
+                        {% set recent_learning_duration = date_duration_calc(extract_max_datetime(user_logs)) %}
+                        <p>スペイン語　3000</p><span class="learning-date small-text">{{ duration_int_to_date(recent_learning_duration) }}</span>
+                    {% else %}
+                        <p>スペイン語　3000</p>
+                    {% endif %}
+                    </div>
+                </div>
+                <section class="choose-section collapse" id="{{lang}}-child">
+
+                    {% for i in range(30) %}
+                    {% set section_num = (i + 1) * 100 %}
+
+                    {% set index = (1+i*100, section_num) | join("-") %}
+                    {% if current_user.is_authenticated and current_user.id == 1 %}
+                    <div class="edit-icon-container">
+                        <span class="pale-text small-text">{{index}}</span>
+                        <a class="fal fa-edit edit-icon" href="{{ url_for('inspect_words', lang=lang, index=index) }}"></a>
+                    </div>
+                    {% endif %}
+
+                    <div class="card" data-bs-toggle="collapse" data-bs-target="#{{lang}}-child-{{ section_num }}" aria-expanded="false" aria-controls="{{lang}}-child-{{ section_num }}">
+                        <div class="card-body">
+                            {% if current_user.is_authenticated %}
+                                {% set user_logs = StudyLog.query.filter(StudyLog.user_id == current_user.id).filter(StudyLog.word_id >= 1 + i * 100 + 9000).filter(StudyLog.word_id <= section_num + 9000).all() %}
+                                {% set recent_learning_duration = date_duration_calc(extract_max_datetime(user_logs)) %}
+                                <p>{{ 1 + i * 100 }}~{{ section_num }}語</p><span class="learning-date small-text">{{ duration_int_to_date(recent_learning_duration) }}</span>
+                            {% else %}
+                                <p>{{ 1 + i * 100 }}~{{ section_num }}語</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <section class="choose-word-set collapse" id="{{lang}}-child-{{ section_num }}">
+
+                        {% for number in range(i*10, i*10 + 10) %}
+                        {% set num1 = 1 + number * 10 %}
+                        {% set num2 = (number + 1) * 10 %}
+                        {% set index_num = (num1, num2)|join("-") %}
+                        <a class="card" href="{{ url_for('quiz', lang=lang, index=index_num) }}">
+                            <div class="card-body">
+                            {% if current_user.is_authenticated %}
+                                {% set user_logs = StudyLog.query.filter(StudyLog.user_id == current_user.id).filter(StudyLog.word_id >= num1 + 9000).filter(StudyLog.word_id <= num2 + 9000).all() %}
+                                {% set recent_learning_duration = date_duration_calc(extract_max_datetime(user_logs)) %}
+                                <p>{{ num1 }}~{{ num2 }}語</p><span class="learning-date small-text">{{ duration_int_to_date(recent_learning_duration) }}</span>
+                            {% else %}
+                                <p>{{ num1 }}~{{ num2 }}語</p>
+                            {% endif %}
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </section>
+                    {% endfor %}
+                </section>
+
+<!--------------------------- Korean ----------------------------->
+                {% set lang = "ko" %}
+                <div class="card" data-bs-toggle="collapse" data-bs-target="#{{lang}}-child" aria-expanded="false" aria-controls="{{lang}}-child">
+                    <div class="card-body">
+                    {% if current_user.is_authenticated %}
+                        {% set user_logs = StudyLog.query.filter(StudyLog.user_id == current_user.id).filter(StudyLog.word_id > 12000).filter(StudyLog.word_id <= 15000).all() %}
+                        {% set recent_learning_duration = date_duration_calc(extract_max_datetime(user_logs)) %}
+                        <p>韓国語　3000</p><span class="learning-date small-text">{{ duration_int_to_date(recent_learning_duration) }}</span>
+                    {% else %}
+                        <p>韓国語　3000</p>
+                    {% endif %}
+                    </div>
+                </div>
+                <section class="choose-section collapse" id="{{lang}}-child">
+
+                    {% for i in range(30) %}
+                    {% set section_num = (i + 1) * 100 %}
+
+                    {% set index = (1+i*100, section_num) | join("-") %}
+                    {% if current_user.is_authenticated and current_user.id == 1 %}
+                    <div class="edit-icon-container">
+                        <span class="pale-text small-text">{{index}}</span>
+                        <a class="fal fa-edit edit-icon" href="{{ url_for('inspect_words', lang=lang, index=index) }}"></a>
+                    </div>
+                    {% endif %}
+
+                    <div class="card" data-bs-toggle="collapse" data-bs-target="#{{lang}}-child-{{ section_num }}" aria-expanded="false" aria-controls="{{lang}}-child-{{ section_num }}">
+                        <div class="card-body">
+                            {% if current_user.is_authenticated %}
+                                {% set user_logs = StudyLog.query.filter(StudyLog.user_id == current_user.id).filter(StudyLog.word_id >= 1 + i * 100 + 12000).filter(StudyLog.word_id <= section_num + 12000).all() %}
+                                {% set recent_learning_duration = date_duration_calc(extract_max_datetime(user_logs)) %}
+                                <p>{{ 1 + i * 100 }}~{{ section_num }}語</p><span class="learning-date small-text">{{ duration_int_to_date(recent_learning_duration) }}</span>
+                            {% else %}
+                                <p>{{ 1 + i * 100 }}~{{ section_num }}語</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <section class="choose-word-set collapse" id="{{lang}}-child-{{ section_num }}">
+
+                        {% for number in range(i*10, i*10 + 10) %}
+                        {% set num1 = 1 + number * 10 %}
+                        {% set num2 = (number + 1) * 10 %}
+                        {% set index_num = (num1, num2)|join("-") %}
+                        <a class="card" href="{{ url_for('quiz', lang=lang, index=index_num) }}">
+                            <div class="card-body">
+                            {% if current_user.is_authenticated %}
+                                {% set user_logs = StudyLog.query.filter(StudyLog.user_id == current_user.id).filter(StudyLog.word_id >= num1 + 12000).filter(StudyLog.word_id <= num2 + 12000).all() %}
+                                {% set recent_learning_duration = date_duration_calc(extract_max_datetime(user_logs)) %}
+                                <p>{{ num1 }}~{{ num2 }}語</p><span class="learning-date small-text">{{ duration_int_to_date(recent_learning_duration) }}</span>
+                            {% else %}
+                                <p>{{ num1 }}~{{ num2 }}語</p>
+                            {% endif %}
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </section>
+                    {% endfor %}
+                </section>
+<!-------------------------------------------------------->
+            </section>
+        </div>
+
+    </div>
+</main>
+{% include "footer.html" %}

@@ -1,0 +1,582 @@
+@charset "UTF-8";
+
+/* ------------ Common -------------- */
+h1, h2, h3, p, a {
+    padding: 0;
+    margin: 0;
+}
+
+.page-header {
+    font-family: 'M PLUS 1p', sans-serif;
+    font-weight: 100;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+#edit-section h2, #result h2, #inspection h2, #lp-main h2 {
+    color: #fff;
+    margin-bottom: 1.5rem;
+}
+
+h2, h3 {
+    font-weight: 400;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+a.card {
+    color: #000;
+}
+.blue-link {
+    color: #4ec0ff;
+}
+.blue-link:hover {
+    color: #0ba8ff;
+}
+
+ul, ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.small-text {
+    font-size: .6rem;
+    text-align: left;
+}
+
+.pale-text {
+    color: #8c8c8d;
+}
+
+.small-heading {
+    font-size: .8rem;
+    text-align: left;
+    padding: .5rem .5rem 0;
+}
+
+h2.small-heading {
+    padding: 0 1rem;
+}
+
+.copyright {
+    font-family: 'M PLUS 1p', sans-serif;
+    font-weight: 100;
+}
+
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+    color: #000;
+}
+
+main {
+    min-height: calc(100vh - 7rem)
+}
+
+footer {
+    text-align: center;
+}
+
+.container-fluid {
+    padding: 0;
+    max-width: 800px;
+}
+
+.container-inner {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 500px;
+}
+
+/* .bg-main-color {
+    background-color: #0074d6;
+} */
+
+.bg-main-color {
+    background-color: #364F6B;
+}
+/* --------------- フォームのエラーメッセージ ----------------- */
+.help-block {
+    color: #FC5185;
+    font-size: .8rem;
+}
+/* ---------------------- Flash Messages ---------------------- */
+.flashes {
+    margin: 0 0 1rem;
+    padding: 0;
+    color: #fff;
+}
+
+.success {
+    background-color: green;
+}
+
+.error {
+    background-color: red;
+}
+
+/* ----------------- 上下中央揃えするためのtable設定 ------------------ */
+.table-container {
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+
+.table-cell {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* ------------- Nav Bar --------------- */
+/* .nav-bar {
+    text-align: center;
+    height: 4rem;
+    padding: .5rem .8rem;
+} */
+.user-name {
+    color: #fff;
+}
+
+.nav-bar {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+#page-header .container-fluid {
+    /* padding: 0 1rem; */
+    height: 72px;
+    position: relative;
+}
+
+#page-header nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    color: #fff;
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+#navbarToggler {
+    z-index: 5;
+    padding-left: 70%;
+}
+
+#navbarToggler ul {
+    /* background-color: #0074d6; */
+    padding: 1.5rem;
+}
+
+.navbar-toggler {
+    padding: .25rem;
+}
+
+.navbar-nav {
+    text-align: right;
+    border-color: #fff;
+    border-style: solid;
+    border-width: .25px;
+}
+
+/* ----------------- Logo ------------------- */
+.brand-logo {
+    font-size: 1rem;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 300;
+    text-align: center;
+}
+.project-logo h2 {
+    font-size: .8rem;
+}
+
+a.project-logo:hover {
+    color: #fff;
+}
+
+span.project-logo {
+    display: inline-block;
+    padding: 0.1em 0;
+}
+
+.logo-top {
+    border-bottom: .08rem solid #fff;
+}
+
+.project-logo {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 300;
+    text-align: center;
+}
+
+/* ------------- Login ------------- */
+/* .login {
+    display: inline-block;
+    height: 45px;
+    line-height: 45px;
+} */
+/* --------------- Card Common ------------------- */
+.card {
+    margin: .5rem;
+}
+
+.card-body {
+    padding: .5rem;
+}
+
+.card-footer {
+    padding: 0;
+}
+
+/* ------------- Section Progress -------------- */
+#progress {
+    text-align: center;
+    padding: 1rem 0;
+}
+#progress .card-footer .d-flex {
+    overflow: scroll;
+}
+
+.progress-board {
+    padding: 2rem .5rem;
+}
+
+.progress-header {
+    display: table;
+    margin: 0 auto;
+}
+
+.progress-header p {
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 1rem;
+}
+
+.total-score-box {
+    margin: 0 auto;
+}
+
+.total-score {
+    font-size: 2.5rem;
+}
+
+.lang-score {
+    min-width: 80px;
+}
+
+/* ----------------- Section Choose Lang ------------------- */
+#choose-lang {
+    text-align: left;
+    padding: 0 0 3rem;
+}
+
+#choose-lang .card:hover {
+    background-color: #f0f8ff;
+}
+
+#choose-lang .card-body {
+    padding: 1rem .5rem;
+    display: flex;
+}
+
+.choose-section {
+    padding-left: 2rem;
+}
+
+.choose-word-set {
+    padding-left: 2rem;
+}
+
+.learning-date {
+    margin-left: auto;
+    color: #8c8c8d;
+    display: flex;
+    align-items: center;
+}
+
+/* ------------------ Word Card ------------------- */
+#word-quiz {
+    padding-top: 1rem;
+    text-align: center;
+}
+
+.progress {
+    margin: 1rem .5rem 0;
+    height: .5rem;
+}
+
+.progress-bar {
+    background-color: #0d90ff;
+}
+
+.word-card {
+    height: 12rem;
+    min-width: 300px;
+    margin-top: 1rem;
+}
+
+.button-container {
+    position: relative;
+    height: 200px;
+    min-width: 300px;
+    /* padding: 1rem; */
+}
+
+.answer-btns {
+    position: absolute;
+    bottom: 0px;
+    width: 150px;
+    font-size: .8rem;
+    font-weight: 300;
+    padding: .5rem;
+    border-radius: 100px;
+    border: 1px solid #999;
+}
+
+.check-ans-btn {
+    /* left: 35%; */
+    /* left: 0;
+    right: 0; */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.memorized-btn {
+    right: 15%;
+    display: none;
+}
+
+.notmemorized-btn {
+    left: 12%;
+    display: none;
+}
+
+.showresult-btn {
+    left: 35%;
+    display: none;
+    color: #fff;
+}
+
+.next-btn {
+    right: 12%;
+    display: none;
+    color: #fff;
+}
+
+.showresult-btn:hover {
+    color: #fff;
+}
+
+.next-btn:hover {
+    color: #fff;
+}
+
+#result-input, #wordlist-input, #langname-input {
+    display: none;
+}
+#word-to-learn {
+    font-size: 1.5rem;
+}
+#word-answer {
+    font-size: 1rem;
+}
+#cd-timer {
+    font-size: 1.25rem;
+}
+.time-display {
+    margin-top: 1rem;
+}
+
+/* ------------------ Login Page --------------------- */
+#login-section {
+    padding: 6rem 3rem;
+    color: #fff;
+    text-align: center;
+}
+
+#login-section h1 {
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    padding-bottom: 1rem;
+    text-align: left;
+}
+
+.form-group label {
+    font-size: .8rem;
+    margin-bottom: .5rem;
+}
+
+#submit {
+    margin-top: 1rem;
+}
+
+#submit {
+    width: 150px;
+    font-size: .8rem;
+    font-weight: 300;
+    padding: .5rem;
+    border-radius: 100px;
+    border: 1px solid #999;
+}
+
+/* ------------------ Result Page -------------------- */
+#result {
+    padding-top: 1rem;
+}
+
+.result-container {
+    padding: 0 1rem;
+}
+
+.result-container p+p {
+    margin-left: auto;
+    width: 40%;
+    text-align: left;
+}
+
+.result-container ul {
+    background-color: #fff;
+    padding: .8rem 1.5rem;
+}
+
+.result-container li {
+    padding: .5rem 1.5rem;
+}
+
+.result-container li+li {
+    border-top: 1px solid #ccc;
+}
+
+.result-icon {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    color: red;
+}
+
+.nextquiz-btn {
+    display: block;
+    width: 120px;
+    font-size: .8rem;
+    font-weight: 300;
+    padding: .5rem;
+    border-radius: 100px;
+    border-width: 1px;
+    border-style: solid;
+    margin: 1.5rem auto 0;
+}
+.goback-home {
+    background-color: #fc5185;
+    display: block;
+    width: 120px;
+    font-size: .8rem;
+    font-weight: 300;
+    padding: .5rem;
+    border-radius: 100px;
+    border-width: 1px;
+    border-style: solid;
+    margin: 1.5rem auto 0;
+    border-color: #fc5185;
+}
+.goback-home:hover {
+    background-color: #db2e6b;
+    border-color: #db2e6b;
+}
+/* ------------- Edit Word Page ------------- */
+.edit-icon-container {
+    text-align: right;
+    padding-right: .5rem;
+    padding-top: .8rem;
+}
+.edit-icon-container .edit-icon {
+    margin: 0;
+}
+.edit-icon {
+    width: 1rem;
+    height: 1rem;
+    color: #4496d3;
+    margin-left: 1rem;
+}
+
+#edit-section {
+    text-align: center;
+}
+
+#edit-section .card-body {
+    padding: 2.5rem;
+}
+
+.apologize-man-img {
+    width: 250px;
+    margin: 0 auto;
+}
+/* -------------------- ランディングページ ----------------------- */
+.main-copy-container {
+    padding-top: 3rem;
+}
+.main-copy {
+    font-size: 2.5rem;
+    color: #fff;
+    padding-left: 1.5rem;
+}
+.sub-copy {
+    font-size: 1.43rem;
+    color: #fff;
+}
+.lp-btn-container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 5rem;
+}
+.create-account-btn {
+    /* width: calc(100% - 2rem); */
+    display: block;
+    margin: 1rem auto;
+    border-radius: 9999px;
+    height: 48px;
+    background-color: #FC5185;
+    border-color: #FC5185;
+}
+.create-account-btn:hover {
+    /* background-color: rgba(252,81,133, 30%); */
+    background-color: #db2e6b;
+    border-color: #db2e6b;
+}
+.login-btn {
+    /* width: calc(100% - 2rem); */
+    display: block;
+    margin: 0 auto;
+    border-radius: 9999px;
+    height: 48px;
+    background-color: transparent;
+    border-color: #FC5185;
+    color: #FC5185;
+    margin-bottom: 1rem;
+}
+.login-btn:hover {
+    background-color: rgba(252,81,133, 30%);
+    border-color: #FC5185;
+    /* box-shadow: 2px 2px 1px 1px #FC5185 inset, -2px -2px 1px 1px #FC5185 inset; */
+}
+
+/* ----------------------- メディアクエリ モバイル ------------------------ */
+@media screen and (max-width: 500px) {
+    #navbarToggler {
+        padding-left: 50%;
+    }
+
+    .answer-btns {
+        /* font-size: .5rem; */
+        width: 120px;
+    }
+
+    .check-ans-btn {
+        width: 150px;
+    }
+}
