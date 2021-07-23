@@ -10,7 +10,7 @@ from functools import wraps
 
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///flash_card.db'
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
 app.config['SECRET_KEY'] = os.urandom(24)
 db = SQLAlchemy(app)
 Bootstrap(app)
