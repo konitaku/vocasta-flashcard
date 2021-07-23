@@ -104,8 +104,7 @@ def home():
                                lang_list=LANG_LIST, lang_headings=LANG_HEADINGS, date_duration_calc=date_duration_calc,
                                StudyLog=StudyLog, extract_max_datetime=extract_max_datetime,
                                duration_int_to_date=duration_int_to_date,
-                               page_name="ホーム"
-                           )
+                               page_name="ホーム")
     else:
         return render_template("lp.html", page_name="「ことば」をもっと身近に。")
 
